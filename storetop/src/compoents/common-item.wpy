@@ -7,11 +7,10 @@
 
         <view class="list-item__order">{{ index+1 }}</view>
 
-        <view class="list-item__text">
+        <view class="list-item__text" @tap="bindtap({{item}})">
             <text class="list-item__title">{{ item.name }}</text>
-            <text class="list-item__sub-title">{{ item.genres[0].name }}</text>
+            <text class="list-item__sub-title">{{ item.genres[0].name }} {{item.releaseDate}}</text>
         </view>
-
     </view>
 </template>
 
@@ -24,5 +23,20 @@
       item: Object,
       index: Object,
     };
+
+    methods = {
+        bindtap (item) {
+            // console.log(item)
+            this.$root.$preload('item', item)
+
+            wepy.navigateTo({url: '../pages/app_detail'})
+            // doSomething
+        }
+    };
+
+    //正确：普通自定义方法在methods对象外声明，与methods平级
+    customFunction () {
+        return 'sth.';
+    }
   }
 </script>

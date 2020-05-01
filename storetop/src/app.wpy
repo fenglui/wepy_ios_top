@@ -86,7 +86,9 @@
         'pages/new_app',
         'pages/new_game',
         'pages/paid_top',
-        'pages/seller_top'
+        'pages/seller_top',
+        'pages/app_detail',
+        'pages/web_page'
       ],
       window: {
         backgroundTextStyle: 'light',

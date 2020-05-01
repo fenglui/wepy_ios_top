@@ -1,0 +1,39 @@
+<template>
+    <web-view src="{{item.url}}"></web-view>
+</template>
+<style>
+
+</style>
+
+<script>
+import wepy from 'wepy'
+
+  export default class webPage extends wepy.page {
+    data = {
+        item: {}
+    };
+    components = {
+    //   'common-list': CommonList
+    };
+
+    methods = {
+    };
+
+    back () {
+        wx.navigateBack()
+    }
+
+    onLoad (params, data) {
+        this.$apply(() => {
+            this.item = data.preload.item
+        })
+    }
+
+    // mixins = [baseMixin];
+
+    // requestData(){
+    //   store.dispatch(requestTopSeller(store.getState().base.country));
+    // }
+
+  }
+</script>

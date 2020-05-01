@@ -1,0 +1,137 @@
+<template>
+    <view class="wrap">
+        <view class="arrow" @tap="back" >
+            <image src="../style/img/back.png" /> <label>{{ item.genres[0].name }} </label>
+        </view>
+
+        <view class="icon_and_name">
+            <image src="{{item.artworkUrl100}}" />
+            <view class="name">
+                {{item.name}}
+            </view>
+            <view class="artistName">
+                {{item.artistName}}
+            </view>
+            
+        </view>
+
+        <view class="download" @tap="download">
+            获取
+        </view>
+       
+        <!-- <view>
+            {{item.name}}
+        </view>
+        <view>
+            {{item.url}}
+        </view> -->
+    </view>
+</template>
+<style>
+.page{
+    margin-top:0;
+}
+.arrow{
+    margin-left:6rpx;
+    margin-top: 60rpx;
+    font-size:26rpx;
+    line-height: 24rpx;
+    position: relative;
+}
+
+.arrow image{
+    width:48rpx;
+    height: 48rpx;
+}
+
+.arrow label{
+    position: absolute;
+    left:60rpx;
+    bottom:12rpx;
+}
+.icon_and_name{
+    margin-top:36rpx;
+    position: relative;
+}
+.icon_and_name image{
+    width:192rpx;
+    height: 192rpx;
+    border-radius:22%;
+    border:2rpx solid rgba(0,0,0,0.1);
+
+    position: absolute;
+    left:0;
+    top:0;
+}
+.name{
+
+    font-weight: bold;
+    position: absolute;
+    left:256rpx;
+    top:0;
+}
+
+.artistName{
+    color:gray;
+    position: absolute;
+    left:256rpx;
+    top:144rpx;
+    font-size: 24rpx;
+}
+.download{
+    position: absolute;
+    left:256rpx;
+    top:180rpx;
+}
+</style>
+
+<script>
+import wepy from 'wepy'
+//   import {getStore, connect} from 'wepy-redux'
+//   import {requestTopSeller} from '../store/action'
+//   import baseMixin from '../mixins/baseMixin'
+//   import CommonList from '../compoents/common-list';
+//   const store = getStore();
+
+//   @connect({
+//     listData: state => state.base.topSellList,
+//     country: state => state.base.country,
+//     countryTitle: state => state.base.countryTitle,
+//   })
+
+  export default class appDetail extends wepy.page {
+    data = {
+        item: {}
+    };
+    components = {
+    //   'common-list': CommonList
+    };
+
+    methods = {
+        download: function  () {
+            this.$root.$preload('item', this.item)
+            wepy.navigateTo({url: '../pages/web_page'})
+        }
+    };
+
+    back () {
+        wx.navigateBack()
+    }
+
+    onLoad (params, data) {
+        
+        // console.log(data.preload.url)
+
+        this.$apply(() => {
+            this.item = data.preload.item
+        })
+    }
+
+    // mixins = [baseMixin];
+
+    // requestData(){
+    //   store.dispatch(requestTopSeller(store.getState().base.country));
+    // }
+
+  }
+</script>
